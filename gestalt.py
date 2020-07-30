@@ -3,6 +3,7 @@
 from bleach import Cleaner
 from bleach.linkifier import LinkifyFilter
 from sanic import Sanic, response
+import socketio
 
 STATIC_ASSETS_PATH = "./static"
 LISTEN_HOST = "127.0.0.1"
