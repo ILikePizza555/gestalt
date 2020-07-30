@@ -1,13 +1,10 @@
-from flask import Flask, render_template
-from flask_socketio import SocketIO
+from sanic import Sanic, response
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'OEYWKSP EHEOEVROEBDLD '
-socketio = SocketIO(app)
+app = Sanic()
 
 @app.route('/')
 def app_view():
-	return render_template("chat.html")
+	return response.file("chat.html")
 
-if __name__ == '__main__':
-	socketio.run(app)
+if __name__ == "__main__":
+	app.run(host="127.0.0.1", port=9000)
