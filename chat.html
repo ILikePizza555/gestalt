@@ -4,9 +4,33 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>The Hive Connected</title>
+		<link type="text/css" rel="stylesheet" href="static/normalize.css">
 		<style type="text/css">
-			.input {
+			body {
+				height: 100vh;
 				display: flex;
+				justify-content: center;
+			}
+
+			main.container {
+				max-width: 768px;
+				margin: 10px;
+				flex-grow: 1;
+
+				display: flex;
+				flex-direction: column;
+			}
+
+			#chat {
+				flex-grow: 1;
+			}
+
+			.chat-input-section {
+				display: flex;
+			}
+
+			#chat-input {
+				flex-grow: 1;
 			}
 		</style>
 	</head>
@@ -14,7 +38,7 @@
 		<main class="container">
 			<h1>Our Words</h1>
 			<section id="chat"></section>
-			<section class="input">
+			<section class="chat-input-section">
 				<input type="text" id="chat-input" placeholder="What do we say?">
 				<button id="chat-send">Send</button>
 			</section>
