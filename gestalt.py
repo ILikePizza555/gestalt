@@ -22,10 +22,8 @@ sio = socketio.AsyncServer(async_mode='sanic')
 sio.attach(app)
 
 @sio.event()
-async def message(sid, data):
-	print("Sid: ", sid, " Data: ", data)
-
-	sanitizedText = inputCleaner.clean(data.text)
+async def message(sid: str, data: dict):
+	sanitizedText = inputCleaner.clean(data["text"])
 	sio.emit("message", {"author": "The Hive", "color": "yellow", "text": sanitizedText})
 
 if __name__ == "__main__":
