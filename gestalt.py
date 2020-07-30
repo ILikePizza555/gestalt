@@ -7,7 +7,7 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def app_view():
-	
+	render_template("chat.html")
 
 if __name__ == '__main__':
 	socketio.run(app)
