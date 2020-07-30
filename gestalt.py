@@ -11,14 +11,15 @@ LISTEN_PORT = 9000
 
 inputCleaner = Cleaner(filters=[LinkifyFilter])
 
-sio = socketio.AsyncServer(async_mode='sanic')
 app = Sanic(name="gestalt")
-sio.attach(app)
 app.static("/static", STATIC_ASSETS_PATH)
 
 @app.route('/')
 async def app_view(request):
-	return response.file("chat.html")
+	return await response.file("chat.html")
+
+sio = socketio.AsyncServer(async_mode='sanic')
+sio.attach(app)
 
 @sio.event()
 async def message(sid, data):
