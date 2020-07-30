@@ -38,10 +38,10 @@
 		<main class="container">
 			<h1>Our Words</h1>
 			<section id="chat"></section>
-			<section class="chat-input-section">
+			<form id="input-form" class="chat-input-section">
 				<input type="text" id="chat-input" placeholder="What do we say?">
-				<button id="chat-send">Send</button>
-			</section>
+				<input type="submit" value="Send">
+			</form>
 		</main>
 
 		<template id="message-template">
@@ -83,7 +83,7 @@
 				chatView.appendChild(CreateMessageView(msg.author, msg.text, msg.color));
 			});
 
-			document.getElementById("chat-send").addEventListener("onclick", SendMessage.bind(undefined, socket));
+			document.getElementById("input-form").addEventListener("submit", (e) => SendMessage(socket));
 		</script>
 	</body>
 </html>
