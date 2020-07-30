@@ -43,5 +43,47 @@
 				<button id="chat-send">Send</button>
 			</section>
 		</main>
+
+		<template id="message-template">
+			<div class="message">
+				<span class="author"></span>:<span class="contents"></span>
+			</div>
+		</template>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			"use strict";
+
+			function CreateMessageView(author, contents, authorColor) {
+				const messageTemplate = document.getElementById("message-template");
+
+				const clone = messageTemplate.content.cloneNode(true);
+
+				const authorElement = clone.querySelector(".author");
+				authorElement.textContent = author;
+				authorElement.style.color = authorColor;
+
+				clone.querySelector(".content").textContent = contents;
+
+				return clone;
+			}
+
+			function SendMessage(socket) {
+				const chatInput = document.getElementById("chat-input").value;
+
+				if (chatInput) {
+					socket.emit("message", {"text": chatInput});
+				}
+			}
+
+			const socket = io();
+
+			socket.on("message", function messageHandler(msg) {
+				const chatView = document.getElementById("chat");
+				chatView.appendChild(CreateMessageView(msg.author, msg.text, msg.color));
+			});
+
+			document.getElementById("chat-send").addEventListener("onclick", SendMessage.bind(undefined, socket));
+		</script>
 	</body>
 </html>

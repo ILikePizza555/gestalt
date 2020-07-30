@@ -21,8 +21,10 @@ async def app_view(request):
 
 @sio.event()
 async def message(sid, data):
+	print("Sid: ", sid, " Data: ", data)
+
 	sanitizedText = inputCleaner.clean(data.text)
-	sio.emit("message", {"text": sanitizedText})
+	sio.emit("message", {"author": "The Hive", "color": "yellow", "text": sanitizedText})
 
 if __name__ == "__main__":
 	app.run(host=LISTEN_HOST, port=LISTEN_PORT)
