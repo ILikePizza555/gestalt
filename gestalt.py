@@ -8,7 +8,7 @@ STATIC_ASSETS_PATH = "./static"
 LISTEN_HOST = "127.0.0.1"
 LISTEN_PORT = 9000
 
-inputCleaner = Cleaner(filter=[LinkifyFilter])
+inputCleaner = Cleaner(filters=[LinkifyFilter])
 
 sio = socketio.AsyncServer(async_mode='sanic')
 app = Sanic(name="gestalt")
