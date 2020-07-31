@@ -24,7 +24,7 @@ sio.attach(app)
 @sio.event()
 async def message(sid: str, data: dict):
 	sanitizedText = inputCleaner.clean(data["text"])
-	await sio.emit("message", {"author": "The Hive", "color": "yellow", "text": sanitizedText})
+	await sio.emit("message", {"author": "The Hive", "color": "#f1c40f", "text": sanitizedText})
 
 if __name__ == "__main__":
 	app.run(host=LISTEN_HOST, port=LISTEN_PORT)
