@@ -1,0 +1,1 @@
+web: pipenv run sanic --host 0.0.0.0 --port 80 gestalt.app 
