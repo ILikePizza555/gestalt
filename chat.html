@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
 	<head>
+		<!--
+			Colors pallet for future use:
+			Buttercup (for The Hive): #F1C40F
+			Cinnabar: #E74C3C
+			Light Blue-Grey: #95A5A6
+			Dark Blue-Grey: #34495E
+			Mountain Meadow: #1ABC9C
+			Purple: #9B59B6
+		-->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>The Hive Connected</title>
@@ -55,7 +64,7 @@
 		<main class="container">
 			<h1>Our Words</h1>
 			<section id="chat"></section>
-			<form id="input-form" class="chat-input-section">
+			<form id="input-form" class="chat-input-section" autocomplete="off">
 				<input type="text" id="chat-input" placeholder="Message us">
 				<input type="submit" value="Send">
 			</form>
@@ -72,16 +81,16 @@
 		<script>
 			"use strict";
 
-			function CreateMessageView(author, contents, authorColor) {
+			function CreateMessageView(messageData) {
 				const messageTemplate = document.getElementById("message-template");
 
 				const clone = messageTemplate.content.cloneNode(true);
 
 				const headerElement = clone.querySelector(".message-header");
-				headerElement.textContent = author;
-				headerElement.style.color = authorColor;
+				headerElement.textContent = messageData.author;
+				headerElement.style.color = messageData.color;
 
-				clone.querySelector(".message-contents").textContent = contents;
+				clone.querySelector(".message-contents").textContent = messageData.text;
 
 				return clone;
 			}
@@ -90,7 +99,7 @@
 
 			socket.on("message", function messageHandler(msg) {
 				const chatView = document.getElementById("chat");
-				chatView.appendChild(CreateMessageView(msg.author, msg.text, msg.color));
+				chatView.appendChild(CreateMessageView(msg));
 			});
 
 			document.getElementById("input-form").addEventListener("submit", (e) => {
