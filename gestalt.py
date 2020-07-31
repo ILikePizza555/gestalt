@@ -4,10 +4,11 @@ from bleach import Cleaner
 from bleach.linkifier import LinkifyFilter
 from sanic import Sanic, response
 import socketio
+import os
 
 STATIC_ASSETS_PATH = "./static"
-LISTEN_HOST = "127.0.0.1"
-LISTEN_PORT = 9000
+LISTEN_HOST = os.getenv("GESTALT_LISTEN_HOST", default="0.0.0.0")
+LISTEN_PORT = os.getenv("GESTALT_LISTEN_PORT", default=80)
 
 inputCleaner = Cleaner(filters=[LinkifyFilter])
 
