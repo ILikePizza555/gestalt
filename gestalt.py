@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /usr/bin/env python3
 
 from bleach import Cleaner
 from bleach.linkifier import LinkifyFilter
